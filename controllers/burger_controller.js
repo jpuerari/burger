@@ -44,11 +44,11 @@ const updateBurger = (burgerObject, burgerId) => {
         console.log(err);
         return reject(err);
       } else if (burgerData.affectedRows === 0) {
-        return resolve({ message: "Couldn't find a burger with that id!"});
+        return resolve({ message: "Couldn't find a burger with that id!", code: 404 });
       }
-      resolve({ message: 'Burger updated successfully!'});
-    })
-  })
+      resolve({ message: 'Burger updated successfully!', code: 200});
+    });
+  });
 };
 
 //eliminate a burger
