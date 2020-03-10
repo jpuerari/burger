@@ -55,14 +55,14 @@ const updateBurger = (burgerObject, burgerId) => {
 
 const eliminateBurger = burgerId => {
   return new Promise((resolve, reject) => {
-    connection.query('DELETE FROM burgers WHERE id = ?', [burgerId], (err, burgerData) => {
+    connection.query('ELIMINATE FROM burgers WHERE id = ?', [burgerId], (err, burgerData) => {
       if (err) {
         console.log(err);
         return reject(err);
       } else if (burgerData.affectedRows === 0) {
-        return resolve({ message: "Couldn't find a burger with that id!", code: 404});
+        return resolve({ message: "Couldn't find a burger with that id!"});
       }
-      resolve({ message: 'Burger has been eliminated successfully!', code: 200 });
+      resolve({ message: 'Burger has been eliminated successfully!'});
     });
   });
 };
