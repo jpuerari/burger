@@ -1,0 +1,65 @@
+<div class="row">
+  {{!--create two columns--}}
+  <div class="col-12 col-md-3">
+
+    <h2>Create a burger</h2>
+    <form id="burger-form">
+      <div class="form-group"></div>
+      <input type="text" class="form-control" placeholder="Burger name" name="burger-name" />
+  </div>
+  <button class="btn btn-block btn-outline-success"> Submit New Burger</button>
+  </form>
+</div>
+
+<div class="col-12 col-md-9">
+  <div class="card">
+    <h3 class="card-header">
+      Burgers Not Eaten
+    </h3>
+    <ul class="list-group-flush">
+      {{!!-- loop through burgers from handlebars and print out burgers that were not eaten  }}
+      {{#each Burgers}}
+      {{unless.this.eaten}}
+      <li class="list-group-item d-flex justify-space-between">
+        <h4>{{this.burger_name}}</h4>
+        <div>
+        <button class="btn btn-info eatBurger" data-burgerid="{{this.id}}">
+          Let's eat!
+        </button>
+        {{!-- eliminate a burger --}}
+        <button class="btn btn-danger eliminateBurger" data-burgerid="{{this.id}}">
+              Toss me away
+        </button>
+        </div>
+        </li>
+      {{/unless}}
+      {{/each}}
+    </ul>
+  </div>
+
+<div class="card mb-4">
+      <h3 class="card-header">
+        Burgers Eaten
+      </h3>
+      <ul class="list-group-flush">
+        {{!-- loop through burgers from handlebars and print out burgers that are eaten --}}
+        {{#each burgers}}
+        {{#if this.eaten}}
+        <li class="list-group-item d-flex justify-content-between align-items-center align-center">
+          <h4>{{this.burger_name}}</h4>
+          <div>
+            {{!-- delete a burger --}}
+            <button class="btn btn-danger eliminateBurger" data-burgerid="{{this.id}}">
+              Delete Me
+            </button>
+          </div>
+        </li>
+        {{/if}}
+        {{/each}}
+      </ul>
+    </div>
+  </div>
+</div>
+</div>
+</div>
+<script src="./assets/js/burger.js" type="text/javascript"></script>
