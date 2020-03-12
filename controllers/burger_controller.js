@@ -6,7 +6,7 @@ const getBurgers = () => {
   //boilerplate for creating a promise
   return new Promise((resolve, reject) => {
     //create an error callback
-    connection.query('SELECT * FROM burgers', (err, burgerData) => {
+    connection.query('SELECT * FROM burgers', (err, burgerdata) => {
 
       //if there is an error
       if (err) {
@@ -15,35 +15,35 @@ const getBurgers = () => {
         return reject(err);
       }
       //this will go to promises.then()
-      resolve(burgerData);
+      resolve(burgerdata);
     });
   });
 };
 
 //create a burger object parameter
-const createBurger = (burgerObject) => {
+const createBurger = burgerObj => {
   return new Promise((resolve, reject) => {
-    connection.query('INSERT INTO burgers SET ?', burgerObject, (err, burgerData) => {
+    connection.query('INSERT INTO burgers SET ?', burgerObj, (err, burgerdata) => {
       if (err) {
         console.log(err);
         return reject(err);
       }
-      resolve(burgerData);
-    })
-  })
-}
+      resolve(burgerdata);
+    });
+  });
+};
 
 //update a burger
 //burgerObject => {eaten: true} OR (eaten: false)
 
-const updateBurger = (burgerObject, burgerId) => {
+const updateBurger = (burgerObj, burgerId) => {
   return new Promise((resolve, reject) => {
 
-    connection.query('UPDATE burgers SET ? WHERE id = ?', [burgerObject, burgerId], (err, burgerData) => {
+    connection.query('UPDATE burgers SET ? WHERE id = ?', [burgerObj, burgerId], (err, burgerdata) => {
       if (err) {
         console.log(err);
         return reject(err);
-      } else if (burgerData.affectedRows === 0) {
+      } else if (burgerdata.affectedRows === 0) {
         return resolve({ message: "Couldn't find a burger with that id!", code: 404 });
       }
       resolve({ message: 'Burger updated successfully!', code: 200});
@@ -53,18 +53,18 @@ const updateBurger = (burgerObject, burgerId) => {
 
 //eliminate a burger
 
-const eliminateBurger = burgerId => {
+const deleteBurger = burgerId => {
   return new Promise((resolve, reject) => {
-    connection.query('ELIMINATE FROM burgers WHERE id = ?', [burgerId], (err, burgerData) => {
+    connection.query('DELETE FROM burgers WHERE id = ?', [burgerId], (err, burgerdata) => {
       if (err) {
         console.log(err);
         return reject(err);
-      } else if (burgerData.affectedRows === 0) {
+      } else if (burgerdata.affectedRows === 0) {
         return resolve({ message: "Couldn't find a burger with that id!"});
       }
-      resolve({ message: 'Burger has been eliminated successfully!'});
+      resolve({ message: 'Burger is toast!'});
     });
   });
 };
 
-  module.exports = { getBurgers, createBurger, updateBurger, eliminateBurger };
+  module.exports = { getBurgers, createBurger, updateBurger, deleteBurger };

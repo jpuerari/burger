@@ -5,10 +5,10 @@ const expressHandlebars = require('express-handlebars');
 // create express app
 const app = express();
 // set port
-const PORT = process.env.PORT || 3306;
+const PORT = process.env.PORT || 3001;
 
 // import database connection
-const connection = require('./config/connection');
+const connection = require('./config/connection.js');
 
 // import routes
 const routes = require('./routes');
