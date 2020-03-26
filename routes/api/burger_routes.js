@@ -1,6 +1,6 @@
 const router = require('express').Router();
 
-const { getBurgers, createBurger, updateBurger, eliminateBurger} = require('../../controllers/burger_controller');
+const { getBurgers, createBurger, updateBurger, deleteBurger} = require('../../controllers/burger_controller');
 
 //create full CRUD routes at '/burgers` (it will eventually become 'api/burger')
 
@@ -38,7 +38,7 @@ router.put('/burger/:id', (req, res) => {
 });
 
 router.delete('/burger/:id', (req, res) => {
-  eliminateBurger(req.params.id)
+  deleteBurger(req.params.id)
   .then(burgerdata => {
     if (burgerdata.code === 404) {
       return res.status(404).json(burgerdata);

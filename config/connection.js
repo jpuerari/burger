@@ -5,6 +5,7 @@ require('dotenv').config();
 
 //create connection to db
 
+//ternary operator
 
 const connection = process.env.JAWSDB_URL
   ? mysql.createConnection(process.env.JAWSDB_URL)
